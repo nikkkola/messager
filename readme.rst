@@ -12,4 +12,4 @@ Twitter. It includes functionality allowing users to:
 -  view a combined feed of messages posted by everybody they follow
 -  search messages
 
-I have included a copy of the initial database in the root directory (containing users and a few messages). If you would like to run the project, database can be set up by editing the database.php file in /application/config/.
+I have included a copy of the initial database in the root directory (containing users and a few messages). If you would like to run the project, it can be set up by creating these tables in your own database and then editing the database.php file in /application/config/.
