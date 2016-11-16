@@ -2,12 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 Class Users_model extends CI_model {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
-
+    /**
+     * Performs a query to check whether a user with the given username and password
+     * exists, and checks if the returned array is empty or not.
+     *
+     * @param  string $username The input username
+     * @param  string $password The input password
+     * @return boolean Wheter the input is in the database
+     */
     public function checkLogin($username, $pass) {
         return count($this->db->select('*')
                             ->from('Users')
@@ -17,6 +19,14 @@ Class Users_model extends CI_model {
                             ->result()) > 0;
     }
 
+    /**
+     * Performs a query to check whether there is an entry in the database
+     * for such input and checks if the return array is empty or not.
+     *
+     * @param  string $follower The follower
+     * @param  string $followed The followed user
+     * @return boolean Whether the follower follows the followed user
+     */
     public function isFollowing($follower, $followed) {
         return count($this->db->select('*')
                             ->from('User_Follows')
@@ -26,19 +36,18 @@ Class Users_model extends CI_model {
                             ->result()) > 0;
     }
 
+    /**
+     * Performs a query to insert an entry in the database for the currently
+     * logged user to follow the user passed as a parameter.
+     *
+     * @param  string $followed The user to be followed
+     * @return void
+     */
     public function follow($followed) {
         $data = array(
                 'follower_username' => $_SESSION['user'],
                 'followed_username' => $followed
         );
         $this->db->insert('User_Follows', $data);
-    }
-
-    public function getAvatarUrl($name) {
-        return $this->db->select('avatar_url')
-                        ->from('Users')
-                        ->where('username', $name)
-                        ->get()
-                        ->result_array();
     }
 }

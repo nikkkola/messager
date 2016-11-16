@@ -2,16 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Search extends CI_Controller {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
+    /**
+     * Loads the search view
+     *
+     * @return void
+     */
     public function index() {
         $data['content'] = 'view_search';
         $this->load->view('template/view_template', $data);
     }
 
+    /**
+     * Loads the messages model and performs the searchMessages function
+     * with the given input. Loads the messages view to display the results
+     * after that.
+     *
+     * @return void
+     */
     public function dosearch() {
         $this->load->model('Messages_model');
         $string = $this->input->get('search');

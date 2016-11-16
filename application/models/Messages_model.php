@@ -2,12 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Messages_model extends CI_Model {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
-
+    /**
+     * Performs a query to select all messages by a single user.
+     *
+     * @param  string $name The name of the poster
+     * @return array An array of messages
+     */
     public function getMessagesByPoster($name) {
         return $this->db->select('*')
                     ->from('Messages')
@@ -17,6 +17,12 @@ class Messages_model extends CI_Model {
                     ->result_array();
     }
 
+    /**
+     * Performs a query to select all messages containg the specified string.
+     *
+     * @param  string $string The string we're looking for
+     * @return array An array of all messages containing the string
+     */
     public function searchMessages($string) {
         return $this->db->select('*')
                     ->from('Messages')
@@ -26,6 +32,13 @@ class Messages_model extends CI_Model {
                     ->result_array();
     }
 
+    /**
+     * Performs a query to insert a message by a user into the database.
+     *
+     * @param  string $poster The user posting the meesage
+     * @param  string $string The message to be posted
+     * @return void
+     */
     public function insertMessage($poster, $string) {
         $data = array(
                 'user_username' => $poster,
@@ -35,6 +48,12 @@ class Messages_model extends CI_Model {
                 ->insert('Messages', $data);
     }
 
+    /**
+     * Performs a query to select all messages from users which the current user follows.
+     *
+     * @param  string $name The name of the user
+     * @return array An array of messages
+     */
     public function getFollowedMessages($name) {
         $followed = $this->db->select('followed_username')
                                 ->from('User_Follows')
