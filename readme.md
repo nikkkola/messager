@@ -11,5 +11,3 @@ Twitter. It includes functionality allowing users to:
 -  follow other users
 -  view a combined feed of messages posted by everybody they follow
 -  search messages
-
-A live version of the project is available [here](http://raptor.kent.ac.uk/~ni60/messager/). You can login with username '*kris*' and password '*password*'.
